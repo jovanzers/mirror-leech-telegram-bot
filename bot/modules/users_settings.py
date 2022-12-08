@@ -187,8 +187,9 @@ Check all available qualities options <a href="https://github.com/yt-dlp/yt-dlp#
         query.message.reply_to_message.delete()
 
 def send_users_settings(update, context):
-    msg = ''.join(f'<code>{u}</code>: {escape(str(d))}\n\n' for u, d in user_data.items())
-    if msg:
+    if msg := ''.join(
+        f'<code>{u}</code>: {escape(str(d))}\n\n' for u, d in user_data.items()
+    ):
         sendMessage(msg, context.bot, update.message)
     else:
         sendMessage('No users data!', context.bot, update.message)

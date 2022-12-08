@@ -23,8 +23,7 @@ def initiate_search_tools():
         globals()['PLUGINS'] = []
         src_plugins = jsonloads(SEARCH_PLUGINS)
         qbclient = get_client()
-        qb_plugins = qbclient.search_plugins()
-        if qb_plugins:
+        if qb_plugins := qbclient.search_plugins():
             for plugin in qb_plugins:
                 qbclient.search_uninstall_plugin(names=plugin['name'])
         qbclient.search_install_plugin(src_plugins)
@@ -189,7 +188,7 @@ def __getResult(search_results, key, message, method):
                         if 'torrent' in subres.keys():
                             msg += f"<a href='{subres['torrent']}'>Direct Link</a><br>"
                         elif 'magnet' in subres.keys():
-                            msg += f"<b>Share Magnet to</b> "
+                            msg += "<b>Share Magnet to</b> "
                             msg += f"<a href='http://t.me/share/url?url={subres['magnet']}'>Telegram</a><br>"
                     msg += '<br>'
                 else:
@@ -201,7 +200,7 @@ def __getResult(search_results, key, message, method):
                     if 'torrent' in result.keys():
                         msg += f"<a href='{result['torrent']}'>Direct Link</a><br><br>"
                     elif 'magnet' in result.keys():
-                        msg += f"<b>Share Magnet to</b> "
+                        msg += "<b>Share Magnet to</b> "
                         msg += f"<a href='http://t.me/share/url?url={quote(result['magnet'])}'>Telegram</a><br><br>"
                     else:
                         msg += '<br>'

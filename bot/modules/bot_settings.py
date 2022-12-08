@@ -43,11 +43,7 @@ def load_config():
         TELEGRAM_HASH = config_dict['TELEGRAM_HASH']
 
     OWNER_ID = environ.get('OWNER_ID', '')
-    if len(OWNER_ID) == 0:
-        OWNER_ID = config_dict['OWNER_ID']
-    else:
-        OWNER_ID = int(OWNER_ID)
-
+    OWNER_ID = config_dict['OWNER_ID'] if len(OWNER_ID) == 0 else int(OWNER_ID)
     DATABASE_URL = environ.get('DATABASE_URL', '')
     if len(DATABASE_URL) == 0:
         DATABASE_URL = ''
@@ -383,10 +379,7 @@ def get_buttons(key=None, edit_type=None):
         buttons.sbutton('Empty String', f"botset emptyqbit {key}")
         buttons.sbutton('Close', "botset close")
         msg = f'Send a valid value for {key}. Timeout: 60 sec'
-    if key is None:
-        button = buttons.build_menu(1)
-    else:
-        button = buttons.build_menu(2)
+    button = buttons.build_menu(1) if key is None else buttons.build_menu(2)
     return msg, button
 
 def update_buttons(message, key=None, edit_type=None):
