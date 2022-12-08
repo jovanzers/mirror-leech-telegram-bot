@@ -111,7 +111,7 @@ Check all yt-dlp api options from this <a href='https://github.com/yt-dlp/yt-dlp
         result = ydl.extractMetaData(link, name, opt, True)
     except Exception as e:
         msg = str(e).replace('<', ' ').replace('>', ' ')
-        return sendMessage(tag + " " + msg, bot, message)
+        return sendMessage(f"{tag} {msg}", bot, message)
     if not select:
         user_dict = user_data.get(user_id, False)
         if 'format:' in opt:
